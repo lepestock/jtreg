@@ -43,7 +43,7 @@ if [ ! -x $1/bin/java ]; then
     exit 1
 fi
 
-JAVA_VERSION=$($1/bin/java -version 2>&1 | grep "^.* version \".*\"$" | sed 's/.*\"\(.*\)\".*/\1/')
+JAVA_VERSION=$($1/bin/java -version 2>&1 | grep "^.* version \".*\".*$" | sed 's/.*\"\(.*\)\".*/\1/')
 
 if case ${JAVA_VERSION} in 1.8*) false ;; *) true; esac; then
     echo "Error: Expected a path to JDK with version 1.8, got version ${JAVA_VERSION}" >&2

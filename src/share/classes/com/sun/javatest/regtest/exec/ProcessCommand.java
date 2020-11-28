@@ -232,6 +232,10 @@ public class ProcessCommand
             throw new IllegalArgumentException("Error stream is required");
         }
         try {
+            out.println("JNPJT: command line passed to the PB: " + cmd.toString());
+            out.println("JNPJT: environment passed to the: " + env.toString());
+            out.println("JNPJT: starting in the path: '" + execDir + "'");
+
             ProcessBuilder pb = new ProcessBuilder(cmd);
             pb.directory(execDir);
             if (env != null) {

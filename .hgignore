@@ -3,3 +3,5 @@ nbproject/private/
 plugins/idea/.idea/
 plugins/idea/build/
 
+# Default ignored files
+src/.idea/workspace.xml
