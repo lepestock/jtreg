@@ -243,6 +243,7 @@ public class ProcessCommand
             InputStream processErr = process.getErrorStream();
 
             long start = System.currentTimeMillis();
+            System.out.printf("JNPJT ProcessCommand start: %,d%n", start);
             Alarm alarm = Alarm.NONE;
             final CountDownLatch timeoutHandlerDone = new CountDownLatch(1);
 
@@ -250,6 +251,7 @@ public class ProcessCommand
                 final Thread victim = Thread.currentThread();
                 alarm = Alarm.schedule(timeout, TimeUnit.MILLISECONDS, out, new Runnable() {
                     public void run() {
+                        System.out.printf("JNPJT Process Command TimeoutHandler... %,d%n", System.currentTimeMillis());
                         invokeTimeoutHandler(timeoutHandler, timeoutHandlerDone, process, victim);
                     }
                 });
@@ -267,9 +269,12 @@ public class ProcessCommand
                 outCopier.start();
                 errCopier.start();
 
+                System.out.printf("JNPJT ProcessCommand pre-pre-end: %,d%n", System.currentTimeMillis());
                 outCopier.join();
                 errCopier.join();
+                System.out.printf("JNPJT ProcessCommand pre-end: %,d%n", System.currentTimeMillis());
                 int exitCode = process.waitFor();
+                System.out.printf("JNPJT ProcessCommand end: %,d%n", System.currentTimeMillis());
 
                 // if the timeout hasn't fired, cancel it as quickly as possible
                 alarm.cancel();

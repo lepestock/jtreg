@@ -390,6 +390,8 @@ public abstract class Action extends ActionHelper {
         }
 
         startTime = (new Date()).getTime();
+        long jnpStartTime = System.currentTimeMillis();
+        pw.printf("JNPJT Start time: %,d%n", jnpStartTime);
     } // startAction()
 
     /**
@@ -400,7 +402,9 @@ public abstract class Action extends ActionHelper {
      */
     protected void endAction(Status status) {
         long elapsedTime = (new Date()).getTime() - startTime;
+        long jnpEndTime = System.currentTimeMillis();
         PrintWriter pw = section.getMessageWriter();
+        pw.printf("JNPJT End time: %,d%n", jnpEndTime);
         pw.println(LOG_ELAPSED_TIME + ((double) elapsedTime/1000.0));
         recorder.close();
         section.setStatus(status);
